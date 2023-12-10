@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>room 626 index</title>
+  <link rel="icon" href="./image/ToK_Link_Artwork.png" type="image/x-icon">
+    <style>
+        body
+        {
+          /* background-color: #00aa00; */
+
+        }
+
+        .main
+        {
+          background-color: #00aa33;
+          margin: 0px;
+          height: 1000px;
+          position: relative;
+        }
+        #box {
+            width: 100px;
+            height: 100px;
+            /* background-color: red; */
+            position: relative;
+        }
+
+        .introduction
+        {
+          background-color: skyblue;
+          height: 250px;
+          
+          font-weight: bold;
+          color: #fff;;
+          text-align: center;
+        }
+        .obstacle {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+        }
+
+        .obstacle1 {
+            top: 200px;
+            left: 200px;
+            background-color:#00ccaa;
+        }
+
+        .obstacle2 {
+            top: 300px;
+            left: 400px;
+            background-color:#0000ff;
+          }
+          
+          .obstacle3 {
+            top: 100px;
+            left: 600px;
+            background-color:#0000ff;
+        }
+        .name
+        {
+          text-align: center;
+          font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="introduction">
+      <span style="font-size: 70px;">勇者，欢迎来到这个世界<br></span>
+      <span style="font-size: 30px;">请使用键盘的方向键移动，走到对应的位置触发事件 <br></span>
+      <span style="font-size: 20px;"><br>你懒的话一样可以直接击点图案，以传送至对应的个人页面</span>
+      
+
+    </div>
+
+    <div class="main">
+      <div id="box"><img src="./image/ToK_Link_Artwork.png" alt="勇者" width="100%"></div>
+      <a href="https://skyline1113.github.io/school_html_page/">
+        <div class="obstacle obstacle1">
+          <img src="./image/sky_homework_ico.png" alt="口爱的肥伦" width="100%">
+          <div class="name" >陈俊宏</div>
+        </div>
+      </a>
+
+      <div class="obstacle obstacle2">
+        <img src="" alt="">
+        <div class="name">杨睿钦</div>
+      </div>
+      <div class="obstacle obstacle3">
+        <img src="" alt="">
+        <div class="name">王泳棋</div>
+      </div>
+
+      <script>
+          var box = document.getElementById('box');
+          var obstacles = document.querySelectorAll('.obstacle');
+          var step = 100; // 移动的步长
+
+          document.addEventListener('keydown', function(event) {
+              
+              // 根据按下的键盘指向，调整元素的位置
+              switch(event.keyCode) {
+                  case 37: // 左箭头
+                      box.style.left = (box.offsetLeft - step) + 'px';
+                      break;
+                  case 38: // 上箭头
+                      box.style.top = (box.offsetTop - step) + 'px';
+                      break;
+                  case 39: // 右箭头
+                      box.style.left = (box.offsetLeft + step) + 'px';
+                      break;
+                  case 40: // 下箭头
+                      box.style.top =  (box.offsetTop + step) + 'px';
+                      break;
+              }
+              // 检查盒子与障碍物是否碰撞
+              for (var i = 0; i < obstacles.length; i++) {
+                  if (isColliding(box, obstacles[i])) {
+                      var url = ''; // 设置障碍物对应的超链接URL
+                      switch(i) {
+                          case 0:
+                              url = 'https://skyline1113.github.io/school_html_page/';
+                              break;
+                          case 1:
+                              url = 'https://www.example2.com';
+                              break;
+                          case 2:
+                              url = 'https://www.example3.com';
+                              break;
+                      }
+                      window.location.href = url;
+                  }
+              }
+          });
+
+          function isColliding(element1, element2) {
+              var rect1 = element1.getBoundingClientRect();
+              var rect2 = element2.getBoundingClientRect();
+
+              return !(
+                  rect1.right <= rect2.left ||
+                  rect1.left >= rect2.right ||
+                  rect1.bottom <= rect2.top ||
+                  rect1.top >= rect2.bottom
+              );
+          }
+          
+      </script>
+    </div>
+</body>
+</html>
