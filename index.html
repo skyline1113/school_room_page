@@ -47,14 +47,19 @@
 
         .obstacle2 {
             top: 300px;
-            left: 400px;
+            left: 600px;
             background-color:#0000ff;
           }
           
           .obstacle3 {
-            top: 100px;
-            left: 600px;
+            top: 0px;
+            left: 1000px;
             background-color:#0000ff;
+        }
+          .obstacle4 {
+            top: 200px;
+            left: 1200px;
+            background-color:#cc7a33;
         }
         .name
         {
@@ -90,26 +95,45 @@
         <div class="name">王泳棋</div>
       </div>
 
+      <a href="https://anycoffeemilk.github.io/class_page/">
+        <div class="obstacle obstacle4">
+          <img src="" alt="返回主页">
+          <div class="name">返回主页</div>
+        </div>
+      </a>
+
       <script>
           var box = document.getElementById('box');
           var obstacles = document.querySelectorAll('.obstacle');
           var step = 100; // 移动的步长
 
           document.addEventListener('keydown', function(event) {
-              
-              // 根据按下的键盘指向，调整元素的位置
+              var left = box.offsetLeft;
+              var top = box.offsetTop;
               switch(event.keyCode) {
                   case 37: // 左箭头
-                      box.style.left = (box.offsetLeft - step) + 'px';
+                    if (left>0)
+                    {
+                      box.style.left = (left - step) + 'px';
+                    }
                       break;
                   case 38: // 上箭头
-                      box.style.top = (box.offsetTop - step) + 'px';
-                      break;
+                    if (top>0)
+                    {
+                      box.style.top = (top - step) + 'px';
+                    }
+                    break;
                   case 39: // 右箭头
-                      box.style.left = (box.offsetLeft + step) + 'px';
+                  if (left<1200)
+                  {
+                    box.style.left = (left + step) + 'px';
+                  }
                       break;
                   case 40: // 下箭头
-                      box.style.top =  (box.offsetTop + step) + 'px';
+                  if (top <=900)
+                  {
+                    box.style.top =  (box.offsetTop + step) + 'px';
+                  }
                       break;
               }
               // 检查盒子与障碍物是否碰撞
@@ -125,6 +149,9 @@
                               break;
                           case 2:
                               url = 'https://www.example3.com';
+                              break;
+                          case 3:
+                              url = 'https://anycoffeemilk.github.io/class_page/';
                               break;
                       }
                       window.location.href = url;
